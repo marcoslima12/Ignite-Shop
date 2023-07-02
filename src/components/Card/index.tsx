@@ -2,6 +2,7 @@ import { Camisa1 } from "@/assets";
 import { Container, Footer } from "./styles";
 import Image from "next/image";
 import "keen-slider/keen-slider.min.css";
+import { priceFormatter } from "@/utils/format";
 
 interface CardProps {
   imgUrl: string,
@@ -16,7 +17,7 @@ export default function Card(props: CardProps) {
       <Image src={props.imgUrl} alt="camisa a venda" width={520} height={480}/>
       <Footer>
         <span>{props.name}</span>
-        <strong>{props.price}</strong>
+        <strong>{priceFormatter.format(props.price)}</strong>
       </Footer>
     </Container>
   );
