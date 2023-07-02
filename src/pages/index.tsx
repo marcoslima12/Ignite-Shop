@@ -3,9 +3,10 @@ import Header from "@/components/Header";
 import { Container, Main } from "@/styles/main";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import { stripe } from "@/lib/stripe";
 import Stripe from "stripe";
+import Link from "next/link";
 
 interface Props {
   products: {
@@ -32,12 +33,13 @@ export default function Home({ products }: Props) {
       <Main ref={sliderRef} className="keen-slider">
         {products.map((product) => {
           return (
-            <Card
-              key={product.id}
-              name={product.name}
-              imgUrl={product.imageUrl}
-              price={product.price}
-            />
+            <Link key={product.id} href={`/product/${encodeURIComponent(product.name)}`}>
+              <Card
+                name={product.name}
+                imgUrl={product.imageUrl}
+                price={product.price}
+              />
+            </Link>
           );
         })}
       </Main>
@@ -45,11 +47,10 @@ export default function Home({ products }: Props) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const response = await stripe.products.list({
     expand: ["data.default_price"],
   });
-  console.log(response.data);
 
   const products = response.data.map((product) => {
     const price = product.default_price as Stripe.Price;
@@ -67,5 +68,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
     props: {
       products,
     },
+    revalidate: 60 * 60 * 2,
   };
 };

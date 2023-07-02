@@ -1,7 +1,10 @@
-import { useRouter } from "next/router";
+import Header from "@/components/Header";
+import { Container } from "@/styles/product";
 
 export default function Product() {
-  const { query } = useRouter();
-
-  return <h1>Produto: {JSON.stringify(query)}</h1>;
+  return (
+    <Container>
+      <Header />
+    </Container>
+  );
 }
