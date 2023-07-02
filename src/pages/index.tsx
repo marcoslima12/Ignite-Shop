@@ -33,7 +33,7 @@ export default function Home({ products }: Props) {
       <Main ref={sliderRef} className="keen-slider">
         {products.map((product) => {
           return (
-            <Link key={product.id} href={`/product/${encodeURIComponent(product.name)}`}>
+            <Link key={product.id} href={`/product/${encodeURIComponent(product.id)}`}>
               <Card
                 name={product.name}
                 imgUrl={product.imageUrl}
