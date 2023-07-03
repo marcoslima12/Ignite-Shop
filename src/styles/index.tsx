@@ -27,10 +27,10 @@ export const {
       'bold': 700
     },
     fontSizes: {
-      'small': 18,
-      'medium': 20,
-      'semi-large': 24,
-      'large': 32,
+      'small': '18px',
+      'medium': '20px',
+      'semi-large': '24px',
+      'large': '32px',
     }
   },
 });

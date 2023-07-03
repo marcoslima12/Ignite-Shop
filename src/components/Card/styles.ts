@@ -47,11 +47,11 @@ export const Footer = styled("footer", {
   span: {
     color: "$gray100",
     fontWeight: "$bold",
-    fontSize: "$large",
+    fontSize: "$semi-large",
   },
   strong: {
     color: "$green100",
     fontWeight: "$bold",
-    fontSize: "$large",
+    fontSize: "$semi-large",
   },
 });
