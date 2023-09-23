@@ -26,6 +26,7 @@ interface ProductProps {
     price: number;
     description: string;
     imageUrl: string;
+    defaultPriceId: string;
   };
 }
 
@@ -35,6 +36,10 @@ export default function Product({ product }: ProductProps) {
   if (isFallback) {
     console.log("isLoading...");
     return <h1>is loading...</h1>;
+  }
+
+  function handleCheckout() {
+    console.log(product.defaultPriceId);
   }
 
   return (
@@ -62,7 +67,7 @@ export default function Product({ product }: ProductProps) {
               <Price>{priceFormatter.format(product.price)}</Price>
               <Description> {product.description} </Description>
             </InfoContent>
-            <Button>Comprar agora</Button>
+            <Button onClick={handleCheckout}>Comprar agora</Button>
           </InfoContainer>
         </Content>
       )}
@@ -96,6 +101,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
         price: price.unit_amount && price.unit_amount / 100,
         description: product.description,
         imageUrl: product.images[0],
+        defaultPriceId: price.id,
       },
     },
     revalidate: 60 * 60 * 1, //1h
