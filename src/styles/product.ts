@@ -13,9 +13,9 @@ export const ImageContainer = styled("div", {
   borderRadius: 8,
   boxShadow: "0px 0px 48px 0px rgba(0, 0, 0, 0.90)",
   background: "linear-gradient(180deg, #1EA483 0%, #7465D4 100%)",
- display: 'flex',
- justifyContent: 'center',
- alignItems: 'center',
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
   img: {
     objectFit: "cover",
   },
@@ -53,6 +53,12 @@ export const Button = styled("button", {
   fontSize: "$medium",
   fontFamily: "Roboto",
   fontWeight: "$regular",
+
+  "&:disabled": {
+    opacity: "0.7",
+    cursor: "not-allowed",
+   
+  },
 });
 
 export const Content = styled("div", {
@@ -60,21 +66,21 @@ export const Content = styled("div", {
   display: "flex",
   maxWidth: 1180,
   margin: "auto",
-  marginTop: '4rem',
+  marginTop: "4rem",
   gap: "4.5rem",
-  position: 'relative',
+  position: "relative",
 
-  'a': {
-    textDecoration: 'none',
+  a: {
+    textDecoration: "none",
     color: "$white",
-    position: 'absolute',
-    top: '-3rem',
+    position: "absolute",
+    top: "-3rem",
     fontSize: "$small",
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    gap: '1rem',
-  }
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "1rem",
+  },
 });
 
 export const InfoContainer = styled("div", {
@@ -83,7 +89,7 @@ export const InfoContainer = styled("div", {
   button: {
     marginTop: "auto",
     cursor: "pointer",
-    "&:hover": {
+    "&:not([disabled]):hover": {
       backgroundColor: "$green100",
       transition: "all 0.2s",
     },

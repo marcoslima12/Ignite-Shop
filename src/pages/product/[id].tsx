@@ -18,6 +18,8 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { priceFormatter } from "@/utils/format";
 import Link from "next/link";
+import axios from "axios";
+import { useState } from "react";
 
 interface ProductProps {
   product: {
@@ -31,6 +33,7 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
+  const [isLoading, setIsLoading] = useState(false);
   const { isFallback } = useRouter();
   //IMPROVE THIS!
   if (isFallback) {
@@ -38,8 +41,20 @@ export default function Product({ product }: ProductProps) {
     return <h1>is loading...</h1>;
   }
 
-  function handleCheckout() {
-    console.log(product.defaultPriceId);
+  async function handleCheckout() {
+    try {
+      setIsLoading(true);
+      const response = await axios.post("/api/checkout", {
+        priceId: product.defaultPriceId,
+      });
+
+      const { checkoutUrl } = response.data;
+
+      window.location.href = checkoutUrl;
+    } catch (error) {
+      alert("Error while redirecting to checkout");
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -67,7 +82,7 @@ export default function Product({ product }: ProductProps) {
               <Price>{priceFormatter.format(product.price)}</Price>
               <Description> {product.description} </Description>
             </InfoContent>
-            <Button onClick={handleCheckout}>Comprar agora</Button>
+            <Button disabled={isLoading} onClick={handleCheckout}>Comprar agora</Button>
           </InfoContainer>
         </Content>
       )}
