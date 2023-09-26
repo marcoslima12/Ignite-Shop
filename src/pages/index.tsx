@@ -7,6 +7,7 @@ import { GetServerSideProps, GetStaticProps } from "next";
 import { stripe } from "@/lib/stripe";
 import Stripe from "stripe";
 import Link from "next/link";
+import Head from "next/head";
 
 interface Props {
   products: {
@@ -28,22 +29,30 @@ export default function Home({ products }: Props) {
   });
 
   return (
-    <Container>
-      <Header />
-      <Main ref={sliderRef} className="keen-slider">
-        {products.map((product) => {
-          return (
-            <Link key={product.id} href={`/product/${encodeURIComponent(product.id)}`}>
-              <Card
-                name={product.name}
-                imgUrl={product.imageUrl}
-                price={product.price}
-              />
-            </Link>
-          );
-        })}
-      </Main>
-    </Container>
+    <>
+      <Head>
+        <title>Ignite Shop</title>
+      </Head>
+      <Container>
+        <Header />
+        <Main ref={sliderRef} className="keen-slider">
+          {products.map((product) => {
+            return (
+              <Link
+                key={product.id}
+                href={`/product/${encodeURIComponent(product.id)}`}
+              >
+                <Card
+                  name={product.name}
+                  imgUrl={product.imageUrl}
+                  price={product.price}
+                />
+              </Link>
+            );
+          })}
+        </Main>
+      </Container>
+    </>
   );
 }
 

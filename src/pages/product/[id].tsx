@@ -20,6 +20,7 @@ import { priceFormatter } from "@/utils/format";
 import Link from "next/link";
 import axios from "axios";
 import { useState } from "react";
+import Head from "next/head";
 
 interface ProductProps {
   product: {
@@ -58,35 +59,42 @@ export default function Product({ product }: ProductProps) {
   }
 
   return (
-    <Container>
-      <Header />
-      {isFallback ? (
-        <h1>Loading...</h1>
-      ) : (
-        <Content>
-          <Link href={"/"}>
-            {"<"}
-            <h1>Voltar </h1>
-          </Link>
-          <ImageContainer>
-            <Image
-              src={product.imageUrl}
-              alt="product photo"
-              width={520}
-              height={480}
-            />
-          </ImageContainer>
-          <InfoContainer>
-            <InfoContent>
-              <Title>{product.name}</Title>
-              <Price>{priceFormatter.format(product.price)}</Price>
-              <Description> {product.description} </Description>
-            </InfoContent>
-            <Button disabled={isLoading} onClick={handleCheckout}>Comprar agora</Button>
-          </InfoContainer>
-        </Content>
-      )}
-    </Container>
+    <>
+      <Head>
+        <title>{product.name}</title>
+      </Head>
+      <Container>
+        <Header />
+        {isFallback ? (
+          <h1>Loading...</h1>
+        ) : (
+          <Content>
+            <Link href={"/"}>
+              {"<"}
+              <h1>Voltar </h1>
+            </Link>
+            <ImageContainer>
+              <Image
+                src={product.imageUrl}
+                alt="product photo"
+                width={520}
+                height={480}
+              />
+            </ImageContainer>
+            <InfoContainer>
+              <InfoContent>
+                <Title>{product.name}</Title>
+                <Price>{priceFormatter.format(product.price)}</Price>
+                <Description> {product.description} </Description>
+              </InfoContent>
+              <Button disabled={isLoading} onClick={handleCheckout}>
+                Comprar agora
+              </Button>
+            </InfoContainer>
+          </Content>
+        )}
+      </Container>
+    </>
   );
 }
 
