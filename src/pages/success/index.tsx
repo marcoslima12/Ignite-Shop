@@ -31,8 +31,8 @@ export default function Success({ product }: SuccessProduct) {
         </ImageContainer>
         <p>
           Uhuul <strong>{product.costumerName}</strong>, sua Camiseta{" "}
-          <strong>{product?.product_name}</strong>
-          {" "}já está a caminho da sua casa.{" "}
+          <strong>{product?.product_name}</strong> já está a caminho da sua
+          casa.{" "}
         </p>
         <Link href="/">Voltar ao catálogo</Link>
       </Content>
@@ -41,6 +41,15 @@ export default function Success({ product }: SuccessProduct) {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  if (!query.session_id) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
   const sessionId = String(query.session_id);
   const session = await stripe.checkout.sessions.retrieve(sessionId, {
     expand: ["line_items", "line_items.data.price.product"],
