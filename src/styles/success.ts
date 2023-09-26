@@ -35,8 +35,8 @@ export const ImageContainer = styled("div", {
   borderRadius: "0.5rem",
   background: "linear-gradient(180deg, #1EA483 0%, #7465D4 100%)",
   img: {
-    width: "inherit",
-    height: "inherit",
+    width: "inherit !important",
+    height: "inherit !important",
   },
   marginBottom: "2rem",
 });
