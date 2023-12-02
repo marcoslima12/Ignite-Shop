@@ -16,4 +16,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## About
 
-This is one of the projects that started my learning journey at Next Js. At this application, you are welcomeing with a carousel of products, fetched from Stripe API, which you can click and be redirect to a detailed product page, that gives you the possibility to buy it and, if so, redirect you sucessfully to another and final page.
+This is one of the projects that started my learning journey at Next Js. At this application, you are welcomeing with a carousel of products, fetched from Stripe API, which you can click and be redirect to a detailed product page, that gives you the possibility to buy it and, if so, redirect you sucessfully to another and final page!
